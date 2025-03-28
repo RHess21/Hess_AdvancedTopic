@@ -12,6 +12,10 @@ import java.net.URL;
 public class ChatGPT {
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 
+    // This method sends a prompt to the ChatGPT API and returns the response
+    // It uses the HttpURLConnection class to make a POST request to the API
+    // Sourced from ChatGPTs API documentation and examples, with the help of ChatGPT itself. 
+    // TODO: Needs some further prompt engineering to get the best results.
     public static String getResponseGPT(String prompt) {
         try {
             // Create the connection
@@ -58,6 +62,8 @@ public class ChatGPT {
         }
     }
 
+    // Helper method to parse the JSON response
+    // This method uses a simple JSON parser to extract the content of the response
     private static String parseResponse(String jsonResponse) {
         // Extract the content of the response using a simple JSON parser
         try {

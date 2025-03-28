@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Connection {
+    // This method fetches the response from a given URL and returns JSON response as a String.
     public static String fetchApiResponse(String urlString) throws Exception {
         URL url = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

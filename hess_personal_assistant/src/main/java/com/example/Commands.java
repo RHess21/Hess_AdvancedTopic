@@ -2,7 +2,9 @@ package com.example;
 
 import com.example.APIs.ChatGPT;
 import com.example.APIs.Food;
+import com.example.APIs.Quotes;
 import com.example.APIs.RecentNews;
+import com.example.APIs.Timer;
 import com.example.APIs.Weather;
 
 public class Commands {
@@ -11,10 +13,11 @@ public class Commands {
     public static void processCommand(String command){
         try{
             command = command.toLowerCase();    
+
+            //Check to see if the command contains a specific keyword, otherwise it will send the prompt to chatGPT
             if(command.contains("weather")){
                 //Access the openweather API to get the weather.
-                String forecast = Weather.getWeather();
-                System.out.println(forecast);
+                System.out.println(Weather.getWeather());
             }
             else if(command.contains("news")){
                 System.out.println(RecentNews.getNews());
@@ -22,11 +25,11 @@ public class Commands {
             else if(command.contains("food")){
                 System.out.println(Food.getRandomMeal());
             }
-            else if(command.contains("joke")){
-                System.out.println("Joke of the day");
+            else if(command.contains("timer")){
+                Timer.startTimer(command);
             }
             else if(command.contains("quote")){
-                System.out.println("Quote of the day");
+                System.out.println(Quotes.getRandomQuote());
             }
             else if(command.contains("exit")){
                 System.out.println("Exiting program...");

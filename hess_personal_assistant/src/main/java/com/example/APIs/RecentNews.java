@@ -7,7 +7,15 @@ import com.example.LoggerUtil;
 import com.google.gson.Gson;
 
 public class RecentNews {
+
     private static final String API_URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=";
+
+    /*
+     * This method fetches the latest news headline for the US.
+     * It constructs the API URL using the API key from the Keys class.
+     * It uses the Connection class to fetch the API response and parses it using Gson.
+     * It returns the title of the first article in the response.
+     */
     public static String getNews(){
         // Will access the news API to get the latest news.
         // This is a placeholder for the actual implementation.
@@ -33,7 +41,14 @@ public class RecentNews {
             return "Sorry, I could not find any news for you.";
         }
     }
-
+    /* 
+    * This is a private static class to hold the response from the News API.
+    * it contains the status, total results, and a list of articles.
+    * Each article contains a source, author, title, description, URL, image URL, published date, and content.
+    * The source contains an ID and name.
+    * This is custom GSON class to parse the JSON response from the News API.
+    * Unused variables are for potential later use, saving almost all of the response
+    */
     private static class NewsResponse {
         private String status;
         private int totalResults;
