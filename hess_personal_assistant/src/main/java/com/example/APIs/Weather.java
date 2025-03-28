@@ -33,11 +33,9 @@ public class Weather {
             return String.format("It is %.1f°F and %s in %s", temperature, description, location);
             
         } catch (Exception e) {
-            e.printStackTrace();
             LoggerUtil.logError(e, "Error during weather API call");
+            return "Im sorry, I was unable to get the weather at this time.";
         }
-        return "Im sorry, I was unable to get the weather at this time.";
-        
     }
 
     // Nested WeatherResponse class

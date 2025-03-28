@@ -1,6 +1,8 @@
 package com.example.APIs;
 
 import java.util.List;
+
+import com.example.LoggerUtil;
 import com.google.gson.Gson;
 
 public class Food {
@@ -18,11 +20,12 @@ public class Food {
             // Return the strMeal from the first meal in the response
             String mealName = mealResponse.getMeals().get(0).strMeal;
             return String.format("%s, would be a good meal for you!", mealName);
+            
         } catch (Exception e) {
-            e.printStackTrace();
+            // Log the error using LoggerUtil
+            LoggerUtil.logError(e, "Error during API call to Food API");
+            return "Sorry, I could not find a meal for you.";
         }
-
-        return null; // Return null if no meal is found or an error occurs
     }
 
     private static class MealResponse {

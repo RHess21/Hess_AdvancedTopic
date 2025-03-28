@@ -1,6 +1,8 @@
 package com.example.APIs;
 
 import com.example.Keys;
+import com.example.LoggerUtil;
+
 import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -46,12 +48,14 @@ public class ChatGPT {
                     return parseResponse(response.toString());
                 }
             } else {
+                LoggerUtil.logError(new Exception("HTTP error code: " + responseCode), "Error during API call to ChatGPT");
                 return "Error: " + responseCode;
             }
         } catch (Exception e) {
             e.printStackTrace();
+            LoggerUtil.logError(e, "Error during API call to ChatGPT");
+            return "Sorry, I dont have an answer for that yet.";
         }
-        return "ChatGPT response will be displayed here.";
     }
 
     private static String parseResponse(String jsonResponse) {

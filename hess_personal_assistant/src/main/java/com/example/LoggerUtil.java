@@ -15,7 +15,7 @@ public class LoggerUtil {
     static {
         try {
             // Configure file handler
-            FileHandler fileHandler = new FileHandler("src\\main\\resources\\Log.txt", true);
+            FileHandler fileHandler = new FileHandler("hess_personal_assistant\\src\\main\\resources\\Log.txt", true);
             fileHandler.setFormatter(new SingleLineFormatter());
             logger.addHandler(fileHandler);
             logger.setUseParentHandlers(false); // Disable console logging

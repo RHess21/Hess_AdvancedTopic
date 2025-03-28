@@ -3,6 +3,7 @@ package com.example.APIs;
 import java.util.List;
 
 import com.example.Keys;
+import com.example.LoggerUtil;
 import com.google.gson.Gson;
 
 public class RecentNews {
@@ -27,10 +28,10 @@ public class RecentNews {
                 return "No news articles available at this time.";
             }
         }catch(Exception e){
-            e.printStackTrace();
+            // Log the error using LoggerUtil
+            LoggerUtil.logError(e, "Error during API call to News API");
+            return "Sorry, I could not find any news for you.";
         }
-
-        return "Latest news headlines will be displayed here.";
     }
 
     private static class NewsResponse {
