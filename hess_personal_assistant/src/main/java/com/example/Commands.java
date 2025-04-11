@@ -17,7 +17,7 @@ public class Commands {
             //Check to see if the command contains a specific keyword, otherwise it will send the prompt to chatGPT
             if(command.contains("weather")){
                 //Access the openweather API to get the weather.
-                System.out.println(Weather.getWeather());
+                TextToSpeech.synthesizeText(Weather.getWeather());
             }
             else if(command.contains("news")){
                 System.out.println(RecentNews.getNews());
