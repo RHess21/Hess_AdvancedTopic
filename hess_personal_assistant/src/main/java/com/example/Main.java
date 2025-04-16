@@ -27,8 +27,13 @@ public class Main {
                     System.out.println("Shift key pressed, starting transcription...");
                     try {
                         String transcript = Transcribe.syncRecognizeFile();
-                        System.out.println("Transcription: " + transcript);
-                        Commands.processCommand(transcript);
+                        System.out.println("Transcript: " + transcript);
+                        if(transcript == ""){
+                            TextToSpeech.synthesizeText("Sorry, I didn't catch that. Could you repeat it?");
+                        }
+                        else{
+                            Commands.processCommand(transcript);
+                        }
                     } catch (Exception ex) {
                         LoggerUtil.logError(ex, "Error during speech recognition");
                         ex.printStackTrace();

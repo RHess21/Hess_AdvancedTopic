@@ -1,8 +1,6 @@
 package com.example;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 import com.google.cloud.texttospeech.v1.AudioConfig;
 import com.google.cloud.texttospeech.v1.AudioEncoding;

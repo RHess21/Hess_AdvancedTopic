@@ -6,6 +6,7 @@ import com.example.APIs.Quotes;
 import com.example.APIs.RecentNews;
 import com.example.APIs.Timer;
 import com.example.APIs.Weather;
+import com.example.TextToSpeech;
 
 public class Commands {
 
@@ -17,7 +18,12 @@ public class Commands {
             //Check to see if the command contains a specific keyword, otherwise it will send the prompt to chatGPT
             if(command.contains("weather")){
                 //Access the openweather API to get the weather.
-                TextToSpeech.synthesizeText(Weather.getWeather());
+                try {
+                    TextToSpeech.synthesizeText(Weather.getWeather());
+                } catch (Exception ex) {
+                    LoggerUtil.logError(ex, "Error getting weather data");
+                    System.out.println("Error getting weather data. Please try again.");
+                }
             }
             else if(command.contains("news")){
                 System.out.println(RecentNews.getNews());
@@ -25,9 +31,10 @@ public class Commands {
             else if(command.contains("food")){
                 System.out.println(Food.getRandomMeal());
             }
-            else if(command.contains("timer")){
+            /*else if(command.contains("timer")){
                 Timer.startTimer(command);
             }
+            */
             else if(command.contains("quote")){
                 System.out.println(Quotes.getRandomQuote());
             }
