@@ -31,7 +31,7 @@ public class RecentNews {
 
             // Extract the first article's title
             if (newsResponse.articles != null && !newsResponse.articles.isEmpty()) {
-                return "Top Headline: " + newsResponse.articles.get(0).title;
+                return "Here is the top headline,  " + newsResponse.articles.get(0).title;
             } else {
                 return "No news articles available at this time.";
             }

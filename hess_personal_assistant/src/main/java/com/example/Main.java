@@ -39,7 +39,12 @@ public class Main {
                         ex.printStackTrace();
                     }
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    System.out.println("ESC key pressed, exiting program...");
+                    try{
+                        TextToSpeech.synthesizeText("Goodbye.");
+                    }catch(Exception ex){
+                        LoggerUtil.logError(ex, "Error during goodbye speech");
+                        System.out.println("Error during speech. Please try again.");
+                    }
                     System.exit(0);
                 }
             }

@@ -21,25 +21,44 @@ public class Commands {
                 try {
                     TextToSpeech.synthesizeText(Weather.getWeather());
                 } catch (Exception ex) {
-                    LoggerUtil.logError(ex, "Error getting weather data");
-                    System.out.println("Error getting weather data. Please try again.");
+                    LoggerUtil.logError(ex, "Error during speech for weather data");
+                    System.out.println("Error during speech. Please try again.");
                 }
             }
             else if(command.contains("news")){
-                System.out.println(RecentNews.getNews());
+                try{
+                    TextToSpeech.synthesizeText(RecentNews.getNews());
+                }catch(Exception e){
+                    LoggerUtil.logError(e, "Error during speech for news data");
+                    System.out.println("Error during speech. Please try again.");
+                }
             }
             else if(command.contains("food")){
-                System.out.println(Food.getRandomMeal());
+                try{
+                    TextToSpeech.synthesizeText(Food.getRandomMeal());
+                }catch(Exception e){
+                    LoggerUtil.logError(e, "Error during speech for food data");
+                    System.out.println("Error during speech. Please try again.");
+                }
             }
-            /*else if(command.contains("timer")){
+            else if(command.contains("timer")){
                 Timer.startTimer(command);
             }
-            */
             else if(command.contains("quote")){
-                System.out.println(Quotes.getRandomQuote());
+                try{
+                    TextToSpeech.synthesizeText(Quotes.getRandomQuote());
+                }catch(Exception e){
+                    LoggerUtil.logError(e, "Error during speech for quote data");
+                    System.out.println("Error during speech. Please try again.");
+                }
             }
-            else if(command.contains("exit")){
-                System.out.println("Exiting program...");
+            else if(command.contains("exit") || command.contains("goodbye") || command.contains("bye")){
+                try{
+                    TextToSpeech.synthesizeText("Have a great day, goodbye.");
+                }catch(Exception e){
+                    LoggerUtil.logError(e, "Error during goodbye speech");
+                    System.out.println("Error during speech. Please try again.");
+                }
                 System.exit(0);
             }
             else{
