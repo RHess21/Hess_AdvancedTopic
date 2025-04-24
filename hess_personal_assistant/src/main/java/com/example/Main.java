@@ -1,54 +1,43 @@
 package com.example;
 
-import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
 
 public class Main {
-    /*
-     * Main method to start the program.
-     * Experimented with chatGPT to find the best way to capture the input from the user.
-     * The program listens for key events and starts the transcription when the shift key is pressed.
-     * The program exits when the ESC key is pressed.
-     * 
-     * Has to be done this way instead of streaming all audio until program stops because THIS ISNT FREE.
-     */
+    public static void main(String[] args) throws Exception {
+        Terminal terminal = TerminalBuilder.terminal();
+        System.out.println("Press any key to start transcription, or 'q' to quit.");
 
-    public static void main(String[] args) {
-        // Creates a JFRAME to capture the key events 
-        JFrame frame = new JFrame("Key Listener");
-        frame.setSize(100, 100);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-                    System.out.println("Shift key pressed, starting transcription...");
-                    try {
-                        String transcript = Transcribe.syncRecognizeFile();
-                        System.out.println("Transcript: " + transcript);
-                        if(transcript == ""){
-                            TextToSpeech.synthesizeText("Sorry, I didn't catch that. Could you repeat it?");
-                        }
-                        else{
-                            Commands.processCommand(transcript);
-                        }
-                    } catch (Exception ex) {
-                        LoggerUtil.logError(ex, "Error during speech recognition");
-                        ex.printStackTrace();
-                    }
-                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    try{
-                        TextToSpeech.synthesizeText("Goodbye.");
-                    }catch(Exception ex){
-                        LoggerUtil.logError(ex, "Error during goodbye speech");
-                        System.out.println("Error during speech. Please try again.");
-                    }
-                    System.exit(0);
+        while (true) {
+            int key = terminal.reader().read();  // Captures a single key press (no Enter needed)
+
+            if (key == 'q' || key == 'Q') {
+                try {
+                    TextToSpeech.synthesizeText("Goodbye.");
+                } catch (Exception ex) {
+                    LoggerUtil.logError(ex, "Error during goodbye speech");
+                    System.out.println("Error during speech. Please try again.");
                 }
+                break;
             }
-        });
-        System.out.println("Press Shift to start transcription or ESC to exit.");
+
+            System.out.println("Recording started...");
+            try {
+                String transcript = Transcribe.syncRecognizeFile();
+                System.out.println("Transcript: " + transcript);
+                if (transcript.isEmpty()) {
+                    TextToSpeech.synthesizeText("Sorry, I didn't catch that. Could you repeat it?");
+                } else {
+                    Commands.processCommand(transcript);
+                }
+            } catch (Exception ex) {
+                LoggerUtil.logError(ex, "Error during speech recognition");
+                ex.printStackTrace();
+            }
+
+            System.out.println("Press any key to continue, or 'q' to quit.");
+        }
+
+        terminal.close(); // Clean up terminal
     }
 }
