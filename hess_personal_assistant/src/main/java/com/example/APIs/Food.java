@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.example.LoggerUtil;
 import com.google.gson.Gson;
+import com.example.JsonValidator;
+
 
 public class Food {
     private static final String API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
@@ -16,6 +18,11 @@ public class Food {
         try {
             // Calls the fetchApiresponse method to connect and return the JSON response as a string
             String response = Connection.fetchApiResponse(API_URL);
+
+            // Validate the JSON response to ensure it contains the required fields
+            if (!JsonValidator.validateFields(response, "meals")) {
+                return "Sorry, I couldn't retrieve the meal information. Please try again later.";
+            }
 
             // Parse the JSON response using Gson just like other APIs
             Gson gson = new Gson();

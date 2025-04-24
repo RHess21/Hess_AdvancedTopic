@@ -6,7 +6,7 @@ import com.example.APIs.Quotes;
 import com.example.APIs.RecentNews;
 import com.example.APIs.Timer;
 import com.example.APIs.Weather;
-import com.example.TextToSpeech;
+//import com.example.TextToSpeech;
 
 public class Commands {
 
@@ -63,8 +63,12 @@ public class Commands {
             }
             else{
                 //Will hit chatGPT for a response if a keyword is not recognized.
-                String response = ChatGPT.getResponseGPT(command);
-                System.out.println(response);
+                try{
+                    TextToSpeech.synthesizeText(ChatGPT.getResponseGPT(command));
+                }catch(Exception e){
+                    LoggerUtil.logError(e, "Error during catch speech");
+                    System.out.println("Error during speech. Please try again.");
+                }
             }
         }catch(Exception e){
             LoggerUtil.logError(e, "Error during command processing");

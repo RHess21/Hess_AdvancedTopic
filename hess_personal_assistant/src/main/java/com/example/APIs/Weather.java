@@ -3,6 +3,7 @@ package com.example.APIs;
 import com.example.Keys;
 import com.example.LoggerUtil;
 import com.google.gson.Gson;
+import com.example.JsonValidator;
 
 import java.util.List;
 
@@ -19,6 +20,11 @@ public class Weather {
             
             //Open connection to api and return the json response as a string.
             String response = Connection.fetchApiResponse(urlString);
+
+            //Validate the JSON response to ensure it contains the required fields
+            if (!JsonValidator.validateFields(response, "main", "weather", "name")) {
+                return "Sorry, I couldn't retrieve the weather information. Please try again later.";
+            }
 
             // Parse the JSON response using Gson
             Gson gson = new Gson();

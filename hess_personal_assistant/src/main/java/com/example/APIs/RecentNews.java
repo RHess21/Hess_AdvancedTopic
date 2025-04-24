@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.Keys;
 import com.example.LoggerUtil;
 import com.google.gson.Gson;
+import com.example.JsonValidator;
 
 public class RecentNews {
 
@@ -24,6 +25,11 @@ public class RecentNews {
 
             //Open connection to api and return the json response as a string.
             String response = Connection.fetchApiResponse(urlString);
+
+            // Validate the JSON response to ensure it contains the required fields
+            if (!JsonValidator.validateFields(response, "status", "totalResults", "articles")) {
+                return "Sorry, I couldn't retrieve the news information. Please try again later.";
+            }
 
             // Parse the JSON response using Gson
             Gson gson = new Gson();
