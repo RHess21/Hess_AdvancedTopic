@@ -1,17 +1,15 @@
 package com.example;
 
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
-
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
-        Terminal terminal = TerminalBuilder.terminal();
-        System.out.println("Press any key to start transcription, or 'q' to quit.");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Press Enter to start transcription, or type 'q' to quit.");
 
         while (true) {
-            int key = terminal.reader().read();  // Captures a single key press (no Enter needed)
+            String input = scanner.nextLine(); // Read user input
 
-            if (key == 'q' || key == 'Q') {
+            if (input.equalsIgnoreCase("q")) {
                 try {
                     TextToSpeech.synthesizeText("Goodbye.");
                 } catch (Exception ex) {
@@ -35,9 +33,9 @@ public class Main {
                 ex.printStackTrace();
             }
 
-            System.out.println("Press any key to continue, or 'q' to quit.");
+            System.out.println("Press Enter to continue, or type 'q' to quit.");
         }
 
-        terminal.close(); // Clean up terminal
+        scanner.close(); // Clean up scanner
     }
 }

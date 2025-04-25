@@ -11,11 +11,11 @@ import java.util.logging.LogRecord;
  */
 public class LoggerUtil {
     private static final Logger logger = Logger.getLogger(LoggerUtil.class.getName());
-
+    private static final String LOG_FILE= "hess_personal_assistant\\src\\main\\resources\\Log.txt";
     static {
         try {
             // Configure file handler
-            FileHandler fileHandler = new FileHandler("hess_personal_assistant\\src\\main\\resources\\Log.txt", true);
+            FileHandler fileHandler = new FileHandler(LOG_FILE, true);
             fileHandler.setFormatter(new SingleLineFormatter());
             logger.addHandler(fileHandler);
             logger.setUseParentHandlers(false); // Disable console logging
