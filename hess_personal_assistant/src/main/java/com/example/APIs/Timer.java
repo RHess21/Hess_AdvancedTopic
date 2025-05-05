@@ -11,6 +11,7 @@ public class Timer {
 
     // Method to start a timer based on user input.
     // The input is expected to be in the format of "5 seconds", "2 minutes", or "1 hour".
+    // Starts a timer on a separate thread and speaks out the time remaining.
     public static void startTimer(String input) {
         try {
             // Regex to extract time amount and unit (e.g., "5 seconds", "2 minutes")

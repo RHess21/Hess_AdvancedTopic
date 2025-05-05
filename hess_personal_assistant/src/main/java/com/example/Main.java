@@ -1,11 +1,16 @@
 package com.example;
 
 import java.util.Scanner;
+
 public class Main {
+
+    // FYI: Can have the main method set the Google Cloud credentials as the enviroment variable
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Press Enter to start transcription, or type 'q' to quit.");
 
+        // runs until the user tells it goodbye or presses q
+        // Classic terminal checking for user input, only needs the user to press enter to start the recording. 
         while (true) {
             String input = scanner.nextLine(); // Read user input
 

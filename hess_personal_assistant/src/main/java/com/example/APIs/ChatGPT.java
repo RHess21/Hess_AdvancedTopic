@@ -16,6 +16,7 @@ public class ChatGPT {
     // This method sends a prompt to the ChatGPT API and returns the response
     // It uses the HttpURLConnection class to make a POST request to the API
     // Sourced from ChatGPTs API documentation and examples, with the help of ChatGPT itself.
+    // Finished the prompt engineering to keep responses short as to not use up the api limits.
     public static String getResponseGPT(String prompt) {
         try {
             // Create the connection

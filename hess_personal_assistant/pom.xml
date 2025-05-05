@@ -15,6 +15,7 @@
 
 <dependencyManagement>
   <dependencies>
+  <!-- Googles BOM (Bill of Materials) - Needed to sort out version conflicts between the Google Dependencies -->
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
@@ -26,20 +27,24 @@
 </dependencyManagement>
 
 <dependencies>
+<!-- Googles Speech-to-Text API, needed for the transcription to figure out what commands to run -->
   <dependency>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-speech</artifactId>
   </dependency>
+  <!-- Google GSON dependency, needed to format the API responses -->
   <dependency>
     <groupId>com.google.code.gson</groupId>
     <artifactId>gson</artifactId>
     <version>2.10.1</version>
   </dependency>
+  <!-- Googles Text-to-Speech API, needed for the TTS -->
   <dependency>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-texttospeech</artifactId>
     <version>2.31.0</version>
   </dependency>
+  <!-- Java Sound API for Audio Playback -->
   <dependency>
     <groupId>javazoom</groupId>
     <artifactId>jlayer</artifactId>
@@ -61,7 +66,7 @@
                 </archive>
             </configuration>
         </plugin>
-        <!-- Maven Shade Plugin for Creating a Fat JAR -->
+        <!-- Maven Shade Plugin for Creating a Fat JAR - Needed to have the dependencies wrapped up with the file -->
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>

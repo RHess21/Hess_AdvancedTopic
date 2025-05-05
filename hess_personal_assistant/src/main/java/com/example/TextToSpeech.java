@@ -16,8 +16,9 @@ import javazoom.jl.player.Player;
 public class TextToSpeech {
       /**
    * Demonstrates using the Text to Speech client to synthesize text or ssml.
-   *
-   * @param text the raw text to be synthesized. (e.g., "Hello there!")
+   * Retrieved this code from the Google Cloud Text-to-Speech Java documentation.
+   * Slight modifications to play the audio using JLayer instead of saving it to a file.
+   * @param text the raw text to be synthesized. In this case its the "AI" response to the user.
    * @throws Exception on TextToSpeechClient Errors.
    */
   public static void synthesizeText(String text) throws Exception {
@@ -49,6 +50,14 @@ public class TextToSpeech {
       playAudio(audioContents); // Play the audio
     }
   }
+
+  /*
+   * This method is called above to play the audio with Jlayer.
+   * This means we don't need to save the audio to a file, we can play it directly from memory.
+   * This is a more efficient way to handle audio playback, especially for short responses.
+   * PARAMETERS: audioContents - ByteString containing the audio data.
+   * Nothing is returned, the audio is played directly.
+   */
   public static void playAudio(ByteString audioContents) {
         try {
             // Convert ByteString to InputStream
